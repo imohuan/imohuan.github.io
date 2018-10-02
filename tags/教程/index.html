@@ -86,18 +86,17 @@
 
 
 
-<meta name="description" content="标签">
+<meta name="description" content="博客">
 <meta name="keywords" content="谢谢大家支持！">
 <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://imohuan.github.io/tags/index.html">
+<meta property="og:title" content="Imohuan">
+<meta property="og:url" content="https://imohuan.github.io/tags/教程/index.html">
 <meta property="og:site_name" content="Imohuan">
-<meta property="og:description" content="标签">
+<meta property="og:description" content="博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-26T01:53:47.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
-<meta name="twitter:description" content="标签">
+<meta name="twitter:title" content="Imohuan">
+<meta name="twitter:description" content="博客">
 
 
 
@@ -127,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://imohuan.github.io/tags/"/>
+  <link rel="canonical" href="https://imohuan.github.io/tags/教程/"/>
 
 
 
 
 
-  <title>标签 | Imohuan</title>
+  <title>标签: 教程 | Imohuan</title>
   
 
 
@@ -150,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,43 +267,54 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
+  
+  
+  
+  <div class="post-block tag">
 
-	<h1 class="post-title" itemprop="name headline">标签</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-        
-        
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 5 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/分享/" style="font-size: 30px; color: #111">分享</a> <a href="/tags/原生/" style="font-size: 12px; color: #ccc">原生</a> <a href="/tags/填坑/" style="font-size: 12px; color: #ccc">填坑</a> <a href="/tags/技术/" style="font-size: 21px; color: #6f6f6f">技术</a> <a href="/tags/教程/" style="font-size: 12px; color: #ccc">教程</a>
-            </div>
-          </div>
-        
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>教程<small>标签</small>
+        </h1>
       </div>
+
       
-      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/09/27/webpack/" itemprop="url">
+              
+                <span itemprop="name">webpack4-教程</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-09-27T14:18:20+08:00"
+              content="2018-09-27" >
+          09-27
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
-    
-    
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -312,13 +322,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -592,10 +595,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -635,6 +634,29 @@
 
 
 <!--  -->
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail']; //'link'
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'n0Vj9A4N2tsUWtCoGVaOIdiU-gzGzoHsz',
+        appKey: '7SSYAvMqLadDdIIQVrQJdVTJ',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+	//avatar:'identicon'
+    });
+  </script>
 
 
 

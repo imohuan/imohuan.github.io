@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="分享,技术," />
+  <meta name="keywords" content="技术,分享," />
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="Vue页面跳转动画效果实现前言现如今移动端APP对用户体验方面的要求越来越高了，最近致力于用户体验优化，因为需要实现类似APP页面切换的动画效果，百度google搜索资料不是很全，所以自己写文档，在实现效果的基础上，顺便恶补一波VueRouter及CSS过渡动画的知识点，欢迎有兴趣的朋友多多指教。 写在前面的思考 如何匹配到相应需要跳转的页面？ 如何判断是“前进”还是“后退”而后使用不同的动画方">
-<meta name="keywords" content="分享,技术">
+<meta name="keywords" content="技术,分享">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue页面跳转动画">
 <meta property="og:url" content="https://imohuan.github.io/2018/09/26/Vue/index.html">
@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/9/20/165f6145284f1936?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1">
 <meta property="og:image" content="https://juejin.im/equation?tex=route%20%E4%BD%9C%E4%B8%BAvue%E5%AE%9E%E4%BE%8B%E7%9A%84%E4%B8%80%E4%B8%AA%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B1%9E%E6%80%A7%EF%BC%8C%E5%92%8C%E5%9C%A8data%E4%B8%AD%E5%86%99%E7%9A%84%E5%B1%9E%E6%80%A7%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84%EF%BC%8C%E9%83%BD%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87this%E7%9A%84%E6%96%B9%E5%BC%8F%E6%8B%BF%E5%88%B0%E3%80%82%E6%97%A2%E7%84%B6%E4%BD%A0%E5%8F%AF%E4%BB%A5%E7%9B%91%E5%90%ACdata%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%8F%98%E5%8C%96%EF%BC%8C%E5%90%8C%E6%A0%B7%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%9B%91%E5%90%AC">
-<meta property="og:updated_time" content="2018-09-26T09:17:43.060Z">
+<meta property="og:updated_time" content="2018-09-26T13:05:58.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue页面跳转动画">
 <meta name="twitter:description" content="Vue页面跳转动画效果实现前言现如今移动端APP对用户体验方面的要求越来越高了，最近致力于用户体验优化，因为需要实现类似APP页面切换的动画效果，百度google搜索资料不是很全，所以自己写文档，在实现效果的基础上，顺便恶补一波VueRouter及CSS过渡动画的知识点，欢迎有兴趣的朋友多多指教。 写在前面的思考 如何匹配到相应需要跳转的页面？ 如何判断是“前进”还是“后退”而后使用不同的动画方">
@@ -436,7 +436,6 @@ export default new Router({
     }
 ]
 })
-复制代码
 </code></pre><h3 id="二、路由跳转-router"><a href="#二、路由跳转-router" class="headerlink" title="二、路由跳转 $router"></a>二、路由跳转 $router</h3><pre><code>组件路由除了使用全局组件 router-link 来实现点击跳转(相当于按钮)外，还可以使用组件本身
 具有的一个实例对象$router及其一些属性来达到目标。  
 $router 是VueRouter的一个实例对象，相当于一个全局的路由器对象。在Vue实例内部，你可以
@@ -472,7 +471,6 @@ router.push({ path: &#39;register&#39;, query: { plan: &#39;private&#39; }})
       &lt;i class=&quot;icon&quot;&gt;&lt;img src=&quot;../assets/point.png&quot; alt=&quot;&quot;&gt;&lt;/i&gt;
       &lt;span&gt;点单&lt;/span&gt;
 &lt;/router-link&gt;
-复制代码
 </code></pre><ol>
 <li><pre><code>&lt;footer class=&quot;version&quot; @click=&quot;goPage(&#39;Author&#39;)&quot;&gt;v 1.0&lt;/footer&gt;
 //Js：
@@ -481,7 +479,6 @@ methods: {
    this.$router.push({ name: url });
  }
 }
-复制代码
 </code></pre></li>
 </ol>
 <h3 id="三、vue路由对象-route-只读"><a href="#三、vue路由对象-route-只读" class="headerlink" title="三、vue路由对象$route(只读)"></a>三、vue路由对象$route(只读)</h3><p>在使用了vue-router的应用中，路由对象会被注入每个组件中，赋值为this.$route,并且当路由切换时，路由对象会被更新。所以route相当于当前正在跳转的路由对象，可以从里面获取name,path,params,query等，即包含了当前URL解析得到的信息，还有URL匹配到的路由记录。<br>路由对象暴露了以下属性(常见)：</p>
@@ -497,10 +494,8 @@ methods: {
 </ol>
 <pre><code>&lt;router-link :to=&quot;{name:&#39;Order&#39;, params: { userId: 123 }}&quot;&gt;
 &lt;/router-link&gt;
-复制代码
 </code></pre><p>用在调用router.push()中也是一回事：</p>
 <pre><code>this.$router.push({ name: &#39;Order&#39;, params: { userId: 123 }})
-复制代码
 </code></pre><ol>
 <li>$route.params<br>对象(object)。路由跳转携带参数：</li>
 </ol>
@@ -678,9 +673,9 @@ watch:{
       
         <div class="post-tags">
           
-            <a href="/tags/分享/" rel="tag"><i class="fa fa-print"></i> 分享</a>
-          
             <a href="/tags/技术/" rel="tag"><i class="fa fa-print"></i> 技术</a>
+          
+            <a href="/tags/分享/" rel="tag"><i class="fa fa-print"></i> 分享</a>
           
         </div>
       
@@ -795,7 +790,7 @@ watch:{
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -817,7 +812,7 @@ watch:{
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
