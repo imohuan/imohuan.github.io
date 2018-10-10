@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="安装依赖 相关信息  —–&amp;gt;  官网查询  cnpm i webpack webpack-cli webpack-dev-server style-loader css-loader less-loader url-loader file-loader  未安装css分离的配置const path = require(&amp;quot;path&amp;quot;); const uglify = req">
+<meta name="description" content="webpack核心概念 Entry：入口，Webpack 执行构建的第一步将从 Entry 开始。 Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。 Chunk：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割。 Loader：模块转换器，用于把模块原内容按照需求转换成新内容。 Plu">
 <meta name="keywords" content="分享,教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack4-教程">
 <meta property="og:url" content="https://imohuan.github.io/2018/09/27/webpack/index.html">
 <meta property="og:site_name" content="Imohuan">
-<meta property="og:description" content="安装依赖 相关信息  —–&amp;gt;  官网查询  cnpm i webpack webpack-cli webpack-dev-server style-loader css-loader less-loader url-loader file-loader  未安装css分离的配置const path = require(&amp;quot;path&amp;quot;); const uglify = req">
+<meta property="og:description" content="webpack核心概念 Entry：入口，Webpack 执行构建的第一步将从 Entry 开始。 Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。 Chunk：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割。 Loader：模块转换器，用于把模块原内容按照需求转换成新内容。 Plu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-27T07:04:12.550Z">
+<meta property="og:updated_time" content="2018-10-10T14:00:55.953Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack4-教程">
-<meta name="twitter:description" content="安装依赖 相关信息  —–&amp;gt;  官网查询  cnpm i webpack webpack-cli webpack-dev-server style-loader css-loader less-loader url-loader file-loader  未安装css分离的配置const path = require(&amp;quot;path&amp;quot;); const uglify = req">
+<meta name="twitter:description" content="webpack核心概念 Entry：入口，Webpack 执行构建的第一步将从 Entry 开始。 Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。 Chunk：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割。 Loader：模块转换器，用于把模块原内容按照需求转换成新内容。 Plu">
 
 
 
@@ -386,290 +386,446 @@
       
 
       
-        <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><blockquote>
-<p><a href="npmjs.com">相关信息</a>  —–&gt;  官网查询</p>
-</blockquote>
-<pre><code class="python">cnpm i webpack webpack-cli webpack-dev-server style-loader css-loader less-loader url-loader file-loader
-</code></pre>
-<h4 id="未安装css分离的配置"><a href="#未安装css分离的配置" class="headerlink" title="未安装css分离的配置"></a>未安装css分离的配置</h4><pre><code class="python">const path = require(&quot;path&quot;);
-const uglify = require(&#39;uglifyjs-webpack-plugin&#39;);//JS压缩插件,对代码进行压缩
-const htmlPlugin = require(&quot;html-webpack-plugin&quot;);
-module.exports = {
-    mode:&quot;development&quot;,
-    entry:{
-        main:&#39;./src/main.js&#39;,
-        //main2:&#39;./src/main2.js&#39;
+        <h3 id="webpack核心概念"><a href="#webpack核心概念" class="headerlink" title="webpack核心概念"></a>webpack核心概念</h3><ul>
+<li>Entry：入口，Webpack 执行构建的第一步将从 Entry 开始。</li>
+<li>Module：模块，在 Webpack 里一切皆模块，一个模块对应着一个文件。Webpack 会从配置的 Entry 开始递归找出所有依赖的模块。</li>
+<li>Chunk：代码块，一个 Chunk 由多个模块组合而成，用于代码合并与分割。</li>
+<li>Loader：模块转换器，用于把模块原内容按照需求转换成新内容。</li>
+<li>Plugin：扩展插件，在 Webpack 构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要的事情。</li>
+<li>Output：输出结果，在 Webpack 经过一系列处理并得出最终想要的代码后输出结果。<br> 项目的运行主要围绕的就是这几大块</li>
+</ul>
+<p>首先看一下构建后目录<br> ├── build<br> │   ├── webpack.base.conf.js<br> │   ├── webpack.dev.conf.js<br> │   ├── webpack.prod.conf.js<br> │   ├── webpack.rules.conf.js<br> ├── src<br> │   ├── css<br> │   ├── js<br> │   ├── images<br> │   ├── assets<br> │   ├── pages<br> │   │   ├── index<br> │   │   │   ├── index.html<br> │   │   │   ├── index.js<br> │   │   │   └── index.scss<br> │   │   ├── login<br> │   │   │   ├── index.html<br> │   │   │   ├── index.js<br> │   │   │   └── index.scss</p>
+<h3 id="1-多页面的入口文件"><a href="#1-多页面的入口文件" class="headerlink" title="1.多页面的入口文件"></a>1.多页面的入口文件</h3><pre><code>修改 webpack.base.conf.js代码
+entry: {
+        // 多入口文件
+        index: [&#39;./src/pages/index/index.js&#39;,],
+        login: &#39;./src/pages/login/index.js&#39;,
     },
-    output:{
-        path:path.resolve(__dirname,&quot;../dist&quot;),
-        filename:&#39;[name].js&#39;
-    },
-    devServer:{
-        contentBase:path.resolve(__dirname,&#39;../dist&#39;),    //设置基本项目结构
-        host:&#39;localhost&#39;,//设置服务器ip或者localhost
-        compress:true,//服务器压缩
-        port:8080
-    },
-    plugins:[
-        new uglify(),//实例化
-        new htmlPlugin({
-            minify:{ //是对html文件进行压缩
-                removeAttributeQuotes:true  //removeAttrubuteQuotes是却掉属性的双引号。
-            },
-            hash:true, //为了开发中js有缓存效果，所以加入hash，这样可以有效避免缓存JS。
-            template:&#39;./src/index.html&#39; //是要打包的html模版路径和文件名称。
-        })
-    ],
-    module:{
-        rules:[
-            {
-                test:/\.css$/,
-                use:[
-                    {loader:&quot;style-loader&quot;}    ,
-                    {loader:&quot;css-loader&quot;}
-                ]
+</code></pre><h3 id="2-配置开发服务器"><a href="#2-配置开发服务器" class="headerlink" title="2.配置开发服务器"></a>2.配置开发服务器</h3><pre><code>npm install webpack-dev-server --save-dev
+//修改 webpack.dev.conf.js代码
 
-            },{
-                test:/\.(png|jpg|gif|jpeg)/,  //是匹配图片文件后缀名称
+devServer: {
+    contentBase: path.join(__dirname, &quot;../dist&quot;),
+    publicPath:&#39;/&#39;,
+    host: &quot;127.0.0.1&quot;,
+    port: &quot;8089&quot;,
+    overlay: true, // 浏览器页面上显示错误
+    // open: true, // 开启自动打开浏览器
+    // stats: &quot;errors-only&quot;, //stats: &quot;errors-only&quot;表示只打印错误：
+    hot: true // 开启热更新
+},
+//修改package.json
+scripts: {
+    &quot;dev&quot;: &quot;cross-env NODE_ENV=development webpack-dev-server  --config build/webpack.dev.conf.js&quot;,
+    &quot;build&quot;: &quot;cross-env NODE_ENV=production webpack --config build/webpack.prod.conf.js&quot;,
+    &quot;server&quot;: &quot;live-server ./ --port=8888&quot;
+},
+</code></pre><h3 id="3-配置loader"><a href="#3-配置loader" class="headerlink" title="3.配置loader"></a>3.配置loader</h3><pre><code>{
+    test: /\.(css|scss|sass)$/,
+    // 不分离的写法
+    // use: [&quot;style-loader&quot;, &quot;css-loader&quot;,sass-loader&quot;]
+    // 使用postcss不分离的写法
+    // use: [&quot;style-loader&quot;, &quot;css-loader&quot;, sass-loader&quot;,&quot;postcss-loader&quot;]
+    // 此处为分离css的写法
+    /*use: extractTextPlugin.extract({
+        fallback: &quot;style-loader&quot;,
+        use: [&quot;css-loader&quot;, &quot;sass-loader&quot;],
+        // css中的基础路径
+        publicPath: &quot;../&quot;
+    })*/
+    // 此处为使用postcss分离css的写法
+    use: extractTextPlugin.extract({
+        fallback: &quot;style-loader&quot;,
+        use: [&quot;css-loader&quot;, &quot;sass-loader&quot;, &quot;postcss-loader&quot;],
+        // css中的基础路径
+        publicPath: &quot;../&quot;
+
+    })
+},
+{
+    test: /\.js$/,
+    use: [&quot;babel-loader&quot;],
+    // 不检查node_modules下的js文件
+    exclude: &quot;/node_modules/&quot;
+}, {
+    test: /\.(png|jpg|gif)$/,
+    use: [{
+        // 需要下载file-loader和url-loader
+        loader: &quot;url-loader&quot;,
+        options: {
+            limit: 5 * 1024,//小于这个时将会已base64位图片打包处理
+            // 图片文件输出的文件夹
+            outputPath: &quot;images&quot;
+        }
+    }]
+}
+</code></pre><h3 id="4-从js中分离css"><a href="#4-从js中分离css" class="headerlink" title="4.从js中分离css"></a>4.从js中分离css</h3><pre><code>npm install extract-text-webpack-plugin --save-dev 
+//这个插件在webpack4.x 运行时会有点问题,后面会提到
+//修改 webpack.base.conf.js代码
+// 分离css插件参数为提取出去的路径
+new extractTextPlugin({
+    filename: &#39;css/[name].[hash:8].min.css&#39;,
+}),
+</code></pre><h3 id="5-处理css3属性前缀，消除冗余的css代码并压缩css"><a href="#5-处理css3属性前缀，消除冗余的css代码并压缩css" class="headerlink" title="5.处理css3属性前缀，消除冗余的css代码并压缩css"></a>5.处理css3属性前缀，消除冗余的css代码并压缩css</h3><pre><code>//属性自动加前缀
+npm install postcss-loader --save-dev 
+//在根目录新建postcss.config.js
+module.exports = {
+    plugins: [
+        require(&#39;autoprefixer&#39;)//自动添加css前缀
+    ]
+};
+//loader里加入postcss
+{
+    test: /\.(css|scss|sass)$/,
+    // 此处为使用postcss分离css的写法
+    use: extractTextPlugin.extract({
+        fallback: &quot;style-loader&quot;,
+        use: [&quot;css-loader&quot;, &quot;sass-loader&quot;, &quot;postcss-loader&quot;],
+        // css中的基础路径
+        publicPath: &quot;../&quot;
+
+    })
+}
+//修改package.json 加入css要兼容浏览器版本的代码
+&quot;browserslist&quot;: [
+    &quot;defaults&quot;,
+    &quot;not ie &lt; 11&quot;,
+    &quot;last 2 versions&quot;,
+    &quot;&gt; 1%&quot;,
+    &quot;iOS 7&quot;,
+    &quot;last 3 iOS versions&quot;
+]
+//消除冗余css代码 使用glob模块去匹配文件所以还要安装glob模块
+npm install purifycss-webpack --save-dev 
+new purifyCssWebpack({
+    paths: glob.sync(path.join(__dirname, &quot;../src/pages/*/*.html&quot;))
+}),
+//压缩css
+npm install optimize-css-assets-webpack-plugin --save-dev 
+//压缩css
+//修改 webpack.prod.conf.js代码
+new OptimizeCSSPlugin({
+    cssProcessorOptions: {
+        safe: true
+    }
+}),
+</code></pre><h3 id="5-清空打包目录"><a href="#5-清空打包目录" class="headerlink" title="5.清空打包目录"></a>5.清空打包目录</h3><pre><code>npm install clean-webpack-plugin --save-dev 
+//修改 webpack.prod.conf.js代码
+//删除dist目录
+new cleanWebpackPlugin([&#39;dist&#39;], {
+    root: path.resolve(__dirname, &#39;../&#39;), //根目录
+    // verbose Write logs to console.
+    verbose: true, //开启在控制台输出信息
+    // dry Use boolean &quot;true&quot; to test/emulate delete. (will not remove files).
+    // Default: false - remove files
+    dry: false,
+}),
+</code></pre><h3 id="6-压缩js"><a href="#6-压缩js" class="headerlink" title="6. 压缩js"></a>6. 压缩js</h3><pre><code>npm install uglifyjs-webpack-plugin --save-dev 
+//修改 webpack.prod.conf.js代码
+//上线压缩 去除console等信息webpack4.x之后去除了webpack.optimize.UglifyJsPlugin
+//https://github.com/mishoo/UglifyJS2/tree/harmony#compress-options
+new UglifyJSPlugin({
+    uglifyOptions: {
+        compress: {
+            warnings: false,
+            drop_debugger: false,
+            drop_console: true
+        }
+    }
+}),
+</code></pre><h3 id="7-提取js公共模块"><a href="#7-提取js公共模块" class="headerlink" title="7.提取js公共模块"></a>7.提取js公共模块</h3><pre><code>// webpack4里面移除了commonChunksPulgin插件，放在了config.optimization里面,提取js， vendor名字可改
+optimization: {
+    splitChunks: {
+        cacheGroups: {
+            vendor: {
+                // test: /\.js$/,
+                test: /[\\/]node_modules[\\/]/,
+                chunks: &quot;initial&quot;, //表示显示块的范围，有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)，默认为all;
+                name: &quot;vendor&quot;, //拆分出来块的名字(Chunk Names)，默认由块名和hash值自动生成；
+                enforce: true,
+            }
+        }
+    }
+},
+//项目里配置了自动提取node_modules里用到的模块如jquery，也可以在原模板里面通过第三方cdn引入，又是另一种配置了。在 webpack.base.conf.js利配置externals后webpack就不会去打包配置模块
+externals: {
+    &#39;jquery&#39;: &#39;window.jQuery&#39;
+},
+//externals就是webpack可以不处理应用的某些依赖库，使用externals配置后，依旧可以在代码中通过CMD、AMD或者window/global全局的方式访问。
+</code></pre><h3 id="8-复制静态资源"><a href="#8-复制静态资源" class="headerlink" title="8.复制静态资源"></a>8.复制静态资源</h3><pre><code>npm install copy-webpack-plugin --save-dev 
+//静态资源输出,将src目录下的assets文件夹复制到dist目录下
+new copyWebpackPlugin([{
+    from: path.resolve(__dirname, &quot;../src/assets&quot;),
+    to: &#39;./assets&#39;,
+    ignore: [&#39;.*&#39;]
+}]),
+</code></pre><h3 id="9-产出html"><a href="#9-产出html" class="headerlink" title="9.产出html"></a>9.产出html</h3><pre><code>npm install html-webpack-plugin --save-dev 
+//修改webpack.base.conf.js代码
+// 获取html-webpack-plugin参数的方法
+var getHtmlConfig = function (name, chunks) {
+    return {
+        template: `./src/pages/${name}/index.html`,
+        filename: `${name}.html`,
+        // favicon: &#39;./favicon.ico&#39;,
+        // title: title,
+        inject: true,
+        hash: true, //开启hash  ?[hash]
+        chunks: chunks,//页面要引入的包
+        minify: process.env.NODE_ENV === &quot;development&quot; ? false : {
+            removeComments: true, //移除HTML中的注释
+            collapseWhitespace: true, //折叠空白区域 也就是压缩代码
+            removeAttributeQuotes: true, //去除属性引用
+        },
+    };
+};
+//配置页面
+const htmlArray = [{
+        _html: &#39;index&#39;,
+        title: &#39;首页&#39;,
+        chunks: [&#39;vendor&#39;, &#39;index&#39;]//页面用到的vendor模块
+    },
+    {
+        _html: &#39;login&#39;,
+        title: &#39;登录&#39;,
+        chunks: [&#39;login&#39;]
+    },
+];
+//自动生成html模板
+htmlArray.forEach((element) =&gt; {
+    module.exports.plugins.push(new htmlWebpackPlugin(getHtmlConfig(element._html, element.chunks)));
+})
+</code></pre><h3 id="10-性能优化-高大上的可视化分析模块"><a href="#10-性能优化-高大上的可视化分析模块" class="headerlink" title="10.性能优化 高大上的可视化分析模块"></a>10.性能优化 高大上的可视化分析模块</h3><pre><code>npm install webpack-bundle-analyzer --save-dev 
+//修改 webpack.prod.conf.js代码
+new BundleAnalyzerPlugin()
+//npm run build 后会打开一个页面
+</code></pre><blockquote>
+<p>Error: Chunk.entrypoints: Use Chunks.groupsIterable and filter by instanceof Entrypoint instead<br> 后来发现webpack4不支持extract-text-webpack-plugin 必须下载next版本安装这个插件<br> npm install extract-text-webpack-plugin@next<br> <a href="https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/701" target="_blank" rel="noopener">https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/701</a></p>
+</blockquote>
+<blockquote>
+<h3 id="项目源码"><a href="#项目源码" class="headerlink" title="项目源码"></a><a href="https://github.com/zhouyupeng/webpack4.x_demo" target="_blank" rel="noopener">项目源码</a></h3></blockquote>
+<h3 id="自己总结"><a href="#自己总结" class="headerlink" title="自己总结"></a>自己总结</h3><blockquote>
+<p>package.json</p>
+</blockquote>
+<pre><code class="python">{
+  &quot;devDependencies&quot;: {
+    &quot;autoprefixer&quot;: &quot;^9.1.5&quot;,
+    &quot;babel-core&quot;: &quot;^6.26.3&quot;,
+    &quot;babel-loader&quot;: &quot;^7.1.5&quot;,
+    &quot;babel-plugin-transform-runtime&quot;: &quot;^6.23.0&quot;,
+    &quot;babel-preset-es2015&quot;: &quot;^6.24.1&quot;,
+    &quot;babel-preset-react&quot;: &quot;^6.24.1&quot;,
+    &quot;clean-webpack-plugin&quot;: &quot;^0.1.19&quot;,
+    &quot;css-loader&quot;: &quot;^1.0.0&quot;,
+    &quot;extract-text-webpack-plugin&quot;: &quot;^4.0.0-beta.0&quot;,
+    &quot;file-loader&quot;: &quot;^2.0.0&quot;,
+    &quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
+    &quot;html-withimg-loader&quot;: &quot;^0.1.16&quot;,
+    &quot;less&quot;: &quot;^3.8.1&quot;,
+    &quot;less-loader&quot;: &quot;^4.1.0&quot;,
+    &quot;node-sass&quot;: &quot;^4.9.3&quot;,
+    &quot;optimize-css-assets-webpack-plugin&quot;: &quot;^5.0.1&quot;,
+    &quot;postcss-loader&quot;: &quot;^3.0.0&quot;,
+    &quot;purify-css&quot;: &quot;^1.2.5&quot;,
+    &quot;purifycss-webpack&quot;: &quot;^0.7.0&quot;,
+    &quot;sass-loader&quot;: &quot;^7.1.0&quot;,
+    &quot;style-loader&quot;: &quot;^0.23.0&quot;,
+    &quot;uglifyjs-webpack-plugin&quot;: &quot;^2.0.1&quot;,
+    &quot;url-loader&quot;: &quot;^1.1.1&quot;,
+    &quot;vue-hot-reload-api&quot;: &quot;^1.3.3&quot;,
+    &quot;vue-html-loader&quot;: &quot;^1.2.4&quot;,
+    &quot;vue-loader&quot;: &quot;^8.7.1&quot;,
+    &quot;vue-style-loader&quot;: &quot;^4.1.2&quot;,
+    &quot;vue-template-compiler&quot;: &quot;^2.5.17&quot;,
+    &quot;webpack&quot;: &quot;^4.20.2&quot;,
+    &quot;webpack-bundle-analyzer&quot;: &quot;^3.0.2&quot;,
+    &quot;webpack-cli&quot;: &quot;^3.1.2&quot;,
+    &quot;webpack-dev-server&quot;: &quot;^3.1.9&quot;
+  },
+  &quot;name&quot;: &quot;webpack&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;dependencies&quot;: {
+    &quot;vue&quot;: &quot;^2.5.17&quot;,
+    &quot;vue-router&quot;: &quot;^3.0.1&quot;
+  },
+  &quot;scripts&quot;: {
+    &quot;build&quot;: &quot;webpack --config=webpack.config.js&quot;,
+    &quot;server&quot;: &quot;webpack-dev-server --config=webpack.config.js&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;description&quot;: &quot;&quot;
+}
+</code></pre>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><blockquote>
+<p>webpack.config.js</p>
+</blockquote>
+<pre><code class="python">const path = require(&quot;path&quot;);
+const uglify = require(&#39;uglifyjs-webpack-plugin&#39;);
+const OptimizeCSSPlugin = require(&#39;optimize-css-assets-webpack-plugin&#39;);
+const htmlPlugin = require(&quot;html-webpack-plugin&quot;);
+const CleanWebpackPlugin = require(&#39;clean-webpack-plugin&#39;);
+const extractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);
+const Webpack = require(&quot;webpack&quot;);
+const glob = require(&#39;glob&#39;);
+const PurifyCSSPlugin = require(&quot;purifycss-webpack&quot;);
+const OptimizeCssAssetsPlugin = require(&#39;optimize-css-assets-webpack-plugin&#39;);
+const BundleAnalyzerPlugin = require(&#39;webpack-bundle-analyzer&#39;).BundleAnalyzerPlugin;
+
+let getHtmlConfig = function (name, chunks) {
+    return {
+        template: `./src/${name}.html`,
+        filename: `${name}.html`,
+        // favicon: &#39;./favicon.ico&#39;,
+        // title: title,
+        inject: true,
+        hash: true,
+        chunks: chunks,
+        minify: process.env.NODE_ENV === &quot;development&quot; ? false : {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true,
+        },
+    };
+};
+
+module.exports = {
+    mode: &quot;production&quot;,
+    entry: {
+        main:&quot;./src/main.js&quot;,
+    },
+    output: {
+        path: path.resolve(__dirname, &quot;dist&quot;),
+        filename: &#39;js/[name].js&#39;
+    },
+    devServer: {
+        contentBase: path.resolve(__dirname, &#39;dist&#39;),
+        host: &#39;localhost&#39;,
+        compress: true,
+        port: 8080,
+        hot:true,
+        inline:true,
+    },
+    plugins: [
+        new uglify(),
+        new CleanWebpackPlugin([&quot;dist&quot;]),
+        new Webpack.HotModuleReplacementPlugin(),
+        new extractTextPlugin(&quot;css/[name].css&quot;),
+        new BundleAnalyzerPlugin(),//look zoomable treemap.
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, &#39;src/*.html&#39;)),
+        }),
+        new OptimizeCssAssetsPlugin({
+            cssProcessorOptions: {  
+                mergeLonghand: false,
+                discardComments: { removeAll: true }
+            },
+            canPrint: true,
+        }),
+        new OptimizeCSSPlugin({
+            cssProcessorOptions: {
+                safe: true
+            }
+        }),
+        new uglify({
+            uglifyOptions: {
+                compress: {
+                    warnings: false,
+                    drop_debugger: false,
+                    drop_console: true
+                }
+            }
+        }),
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: &#39;vue-loader&#39;,
+                exclude:/node_modules/
+            }, {
+                test:/\.css$/,
+                use: extractTextPlugin.extract({
+                    fallback: &quot;style-loader&quot;,
+                    use: [&quot;css-loader&quot;,&quot;postcss-loader&quot;],
+                    publicPath: &#39;../&#39;
+                }),
+                exclude:/node_modules/
+            }, {
+                test: /\.scss$/,
+                use:extractTextPlugin.extract({
+                    fallback:&quot;style-loader&quot;,
+                    use:[&quot;css-loader&quot;,&quot;sass-loader&quot;,&quot;postcss-loader&quot;],
+                    publicPath: &#39;../&#39;
+                })
+            }, {
+                test: /\.less$/,
+                use:extractTextPlugin.extract({
+                    fallback:&quot;style-loader&quot;,
+                    use:[&quot;css-loader&quot;,&quot;less-loader&quot;,&quot;postcss-loader&quot;],
+                    publicPath: &#39;../&#39;
+                }),
+                exclude:/node_modules/
+            }, {
+                test:/\.(png|jpg|gif|jpeg)/,
                 use:[{
-                    loader:&#39;url-loader&#39;, //是指定使用的loader和loader的配置参数
+                    loader:&#39;url-loader&#39;,
                     options:{
-                        limit:5000  //是把小于5000B的文件打成Base64的格式，写入JS
+                        limit:2000,
+                        outputPath:&#39;images/&#39;
                     }
                 }]
+            }, {
+                test: /\.(eot|ttf|woff|svg|woff2)$/,
+                use: {
+                    loader: &#39;file-loader&#39;,
+                    options:{
+                        outputPath: &#39;fonts/&#39;
+                    }
+                },
+                exclude:/node_modules/
+            }, {
+                test: /\.(htm|html)$/,
+                use: &#39;html-withimg-loader&#39;
+            },{
+                test:/\.(jsx|js)$/,
+                use:{
+                    loader:&#39;babel-loader&#39;,
+                    options:{
+                        presets:[
+                            &quot;es2015&quot;,&quot;react&quot;
+                        ],
+                        plugins: [&#39;transform-runtime&#39;]
+                    }
+                },
+                exclude:/node_modules/
             }
         ]
+    },
+    resolve: {
+        alias: {
+            &#39;vue$&#39;: &#39;vue/dist/vue.esm.js&#39;
+        }
     }
-}
-</code></pre>
-<h3 id="安装css分离"><a href="#安装css分离" class="headerlink" title="安装css分离"></a>安装css分离</h3><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><pre><code>cnpm i extract-text-webpack-plugin
-</code></pre><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><blockquote>
-<p>如果报错 —– 原因版本和webpack版本不统一  </p>
-</blockquote>
-<pre><code class="python">cnpm install --save-dev extract-text-webpack-plugin@next
-</code></pre>
-<pre><code class="python">const extractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);
+};
 
-plugins:[new extractTextPlugin(&quot;css/index.css&quot;)],
-module:{
-    rules:[
-        {
-            test:/\.css$/,
-            use: extractTextPlugin.extract({
-                fallback: &quot;style-loader&quot;,
-                use: &quot;css-loader&quot;
-            })
-        }
-    ]
-}
-</code></pre>
-<h3 id="把相对路径转换绝对路"><a href="#把相对路径转换绝对路" class="headerlink" title="把相对路径转换绝对路"></a>把相对路径转换绝对路</h3><pre><code class="python">output:{
-     publicPath:&quot;http://localhost:8080/&quot;  
-     //publicPath：主要作用就是处理静态文件路径的。
-     //http://localhost:8080/为devServer里面的本地服务地址
-}
-</code></pre>
-<h3 id="把图片放到指定的文件夹下"><a href="#把图片放到指定的文件夹下" class="headerlink" title="把图片放到指定的文件夹下"></a>把图片放到指定的文件夹下</h3><h4 id="依赖-1"><a href="#依赖-1" class="headerlink" title="依赖"></a>依赖</h4><pre><code>cnpm i html-withimg-loader
-</code></pre><h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre><code class="python">module:{
-    rules:[
-        {
-            test: /\.(htm|html)$/i,
-            use:[ &#39;html-withimg-loader&#39;] 
-        },{
-            test:/\.(png|jpg|gif|jpeg)/,  //是匹配图片文件后缀名称
-            use:[{
-                loader:&#39;url-loader&#39;, //是指定使用的loader和loader的配置参数
-                options:{
-                    limit:5000,  //是把小于5000B的文件打成Base64的格式，写入JS
-                    outputPath:&#39;images/&#39;,  //打包后的图片放到images文件夹下
-                }
-            }]
-        }
-    ]
-}
-</code></pre>
-<h3 id="清空缓存的dist中文件"><a href="#清空缓存的dist中文件" class="headerlink" title="清空缓存的dist中文件"></a>清空缓存的dist中文件</h3><h4 id="依赖-2"><a href="#依赖-2" class="headerlink" title="依赖"></a>依赖</h4><pre><code class="python">cnpm i clean-webpack-plugin
-</code></pre>
-<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><pre><code class="python">const CleanWebpackPlugin = require(&#39;clean-webpack-plugin&#39;);
-plugins: [
-    new CleanWebpackPlugin([&quot;../dist&quot;])
-]
-</code></pre>
-<h3 id="Less文件的打包和分离"><a href="#Less文件的打包和分离" class="headerlink" title="Less文件的打包和分离"></a>Less文件的打包和分离</h3><h4 id="依赖-3"><a href="#依赖-3" class="headerlink" title="依赖"></a>依赖</h4><pre><code class="python">cnpm i less less-loader
+const htmlArray = [{
+        _html: &#39;index&#39;,
+        chunks: [ &#39;index&#39;]
+    },
+];
+
+
+htmlArray.forEach((element) =&gt; {
+    module.exports.plugins.push(new htmlPlugin(getHtmlConfig(element._html, element.chunks)));
+});
 </code></pre>
 <blockquote>
-<p>注意: 需要在js中引入文件 如:import less from “路径”，同css一样</p>
+<p>postcss.config.js</p>
 </blockquote>
-<h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><pre><code class="python">module:{
-    rules:[
-       {
-            test: /\.less$/,
-            use: extractTextPlugin.extract({
-                use:[
-                    {loader: &quot;css-loader&quot;},
-                    {loader: &quot;less-loader&quot;}
-                ],
-                fallback: &quot;style-loader&quot;
-            })
-        }
-    ]
-}
-</code></pre>
-<h3 id="Sass文件的打包和分离"><a href="#Sass文件的打包和分离" class="headerlink" title="Sass文件的打包和分离"></a>Sass文件的打包和分离</h3><blockquote>
-<p>把上面的less全部改为Sass</p>
-</blockquote>
-<h3 id="自动处理CSS3属性前缀-！报未知错误"><a href="#自动处理CSS3属性前缀-！报未知错误" class="headerlink" title="自动处理CSS3属性前缀 ！报未知错误"></a>自动处理CSS3属性前缀 ！报未知错误</h3><h4 id="依赖-4"><a href="#依赖-4" class="headerlink" title="依赖"></a>依赖</h4><pre><code class="python">cnpm i postcss-loader autoprefixer
-</code></pre>
-<h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><pre><code class="python">刚刚失败了
-</code></pre>
-<h3 id="消除未使用的CSS-删除的只剩下body样式"><a href="#消除未使用的CSS-删除的只剩下body样式" class="headerlink" title="消除未使用的CSS   !删除的只剩下body样式"></a>消除未使用的CSS   !删除的只剩下body样式</h3><h4 id="依赖-5"><a href="#依赖-5" class="headerlink" title="依赖"></a>依赖</h4><blockquote>
-<p>PurifyCSS-webpack要依赖于purify-css</p>
-</blockquote>
-<pre><code class="python">cnpm i purifycss-webpack purify-css
-</code></pre>
-<h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><pre><code class="python">const glob = require(&#39;glob&#39;); //检查html模板
-const PurifyCSSPlugin = require(&quot;purifycss-webpack&quot;);
-plugins:[
-    new PurifyCSSPlugin({ 
-      paths: glob.sync(path.join(__dirname, &#39;src/*.html&#39;)),
-      //这里配置了一个paths，主要是需找html模板，purifycss根据这个配置会遍历你的文件，
-        查找哪些css被使用了。
-    })
-]
-</code></pre>
-<h3 id="webpack增加babel支持"><a href="#webpack增加babel支持" class="headerlink" title="webpack增加babel支持"></a>webpack增加babel支持</h3><h4 id="依赖-6"><a href="#依赖-6" class="headerlink" title="依赖"></a>依赖</h4><pre><code class="python">cnpm i babel-core babel-loader babel-preset-es2015 babel-preset-react
-</code></pre>
-<blockquote>
-<p>如果报错</p>
-</blockquote>
-<pre><code class="python">cnpm i babel-loader@7.1.5
-</code></pre>
-<h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><pre><code class="python">module:{
-    rules:[
-       {
-           test:/\.(jsx|js)$/,
-           use:{
-               loader:&#39;babel-loader&#39;,
-               options:{
-                   presets:[
-                       &quot;es2015&quot;,&quot;react&quot;
-                   ]
-               }
-           },
-           exclude:/node_modules/
-        }
-    ]
-}
-</code></pre>
-<h1 id="懒-–-复制算了"><a href="#懒-–-复制算了" class="headerlink" title="懒 – 复制算了"></a>懒 – 复制算了</h1><hr>
-<p>babelrc配置<br> 虽然Babel可以直接在webpack.config.js中进行配置，但是考虑到babel具有非常多的配置选项，如果卸载webapck.config.js中会非常的雍长不可阅读，所以我们经常把配置卸载.babelrc文件里。<br> 在项目根目录新建.babelrc文件，并把配置写到文件里。</p>
-<p>.babelrc文件下</p>
-<pre><code>{
-    &quot;presets&quot;:[&quot;react&quot;,&quot;es2015&quot;]
-}
-</code></pre><p>这时候.webpack.dev.config.js里的loader配置</p>
-<pre><code>//babel 配置
-           {
-               test:/\.(jsx|js)$/,
-               use:{
-                   loader:&#39;babel-loader&#39;,
-               },
-               exclude:/node_modules/
-           }
-</code></pre><p>18.3、  ENV：<br> 现在网络上已经不流行babel-preset-es2015，现在官方推荐使用的是babel-preset-env,那我们为了紧跟潮流，我们在讲一下env的配置方法。<br> 首先需要下载：</p>
-<pre><code>npm install --save-dev babel-preset-env
-</code></pre><p>然后修改.babelrc里的配置文件。其实只要把之前的es2015换成env就可以了。</p>
-<pre><code>{
-    &quot;presets&quot;:[&quot;react&quot;,&quot;env&quot;]
-}
-</code></pre><h3 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h3><blockquote>
-<p>未解决问题:</p>
-<p>​    老是缺少其他模块，老是报错</p>
-</blockquote>
-<h3 id="依赖-7"><a href="#依赖-7" class="headerlink" title="依赖"></a>依赖</h3><pre><code class="python">cnpm i webpack webpack-cli webpack-dev-server style-loader css-loader less-loader url-loader file-loader extract-text-webpack-plugin@next html-withimg-loader clean-webpack-plugin less less-loader purifycss-webpack purify-css babel-core babel-loader@7.1.5 babel-preset-es2015 babel-preset-react html-webpack-plugin
-</code></pre>
-<h3 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h3><pre><code class="PYTHON">const path = require(&quot;path&quot;);
-const uglify = require(&#39;uglifyjs-webpack-plugin&#39;);//JS压缩插件,对代码进行压缩
-const htmlPlugin = require(&quot;html-webpack-plugin&quot;);
-const extractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;); //将css img 单独存入一个文件夹中
-const CleanWebpackPlugin = require(&#39;clean-webpack-plugin&#39;); //清空缓存
-const glob = require(&#39;glob&#39;); //检查html模板
-const PurifyCSSPlugin = require(&quot;purifycss-webpack&quot;) ;//PurifyCSS可以大大减少CSS冗余，清除多余的css
-var website ={
-    publicPath:&quot;http://localhost:8080/&quot; //这里的IP和端口，是你本机的ip或者是你devServer配置的IP和端口
-}
-module.exports = {
-    mode:&quot;development&quot;,
-    entry:{
-        main:&#39;./src/style.js&#39;,
-        //main2:&#39;./src/main2.js&#39;
-    },
-    output:{
-        path:path.resolve(__dirname,&quot;../dist&quot;),
-        filename:&#39;[name].js&#39;,
-        publicPath:website.publicPath  //publicPath：主要作用就是处理静态文件路径的。
-        //作用:相对路径改为了绝对路径，这样来讲速度更快
-    },
-    devServer:{
-        contentBase:path.resolve(__dirname,&#39;../dist&#39;),    //设置基本项目结构
-        host:&#39;localhost&#39;,//设置服务器ip或者localhost
-        compress:true,//服务器压缩
-        port:8080
-    },
-    plugins:[
-        new uglify(),//实例化
-        new htmlPlugin({
-            minify:{ //是对html文件进行压缩
-                removeAttributeQuotes:true  //removeAttrubuteQuotes是却掉属性的双引号。
-            },
-            hash:true, //为了开发中js有缓存效果，所以加入hash，这样可以有效避免缓存JS。
-            template:&#39;./src/index.html&#39; //是要打包的html模版路径和文件名称。
-        }),
-        new extractTextPlugin(&quot;css/[name].css&quot;),   //这里的/css/[name].css 是分离后的路径
-        new CleanWebpackPlugin([&#39;../dist&#39;]), //清空缓存
-        new PurifyCSSPlugin({ 
-          //这里配置了一个paths，主要是需找html模板，purifycss根据这个配置会遍历你的文件，查找哪些            css被使用了。
-          paths: glob.sync(path.join(__dirname, &#39;src/*.html&#39;)),
-        }),
-    ],
-    module:{
-        rules:[
-                {
-                    test:/\.css$/,
-                    use: extractTextPlugin.extract({
-                        fallback: &quot;style-loader&quot;,
-                        use:[
-                            {loader:&#39;css-loader&#39;}//,{loader:&#39;postcss-loader&#39;}                                     //postcss-loader加前缀
-                        ]
-                    })
-                },{    
-                    test:/\.(png|jpg|gif|jpeg)/,  //是匹配图片文件后缀名称
-                    use:[{
-                        loader:&#39;url-loader&#39;, //是指定使用的loader和loader的配置参数
-                        options:{
-                            limit:5000,  //是把小于500B的文件打成Base64的格式，写入JS
-                            outputPath:&#39;images/&#39;  //打包后的图片放到images文件夹下
-                        }
-                    }]
-                },{
-                    test: /\.(htm|html)$/i,
-                    use:[ &#39;html-withimg-loader&#39;]
-                },{
-                    test: /\.less$/,
-                    use: extractTextPlugin.extract({
-                        use:[
-                            {loader: &quot;css-loader&quot;},
-                            {loader: &quot;less-loader&quot;}
-                        ],
-                        fallback: &quot;style-loader&quot;
-                    })
-                },{ //使webpack支持babel
-                   test:/\.(jsx|js)$/,
-                   use:{loader:&#39;babel-loader&#39;,options:{presets:[&quot;es2015&quot;,&quot;react&quot;]}},
-                   exclude:/node_modules/
-                }
-        ]
-    }
+<pre><code class="python">module.exports = {
+    plugins: [require(&#39;autoprefixer&#39;)]  // 引用该插件即可了
 }
 </code></pre>
 
@@ -835,7 +991,7 @@ module.exports = {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -846,7 +1002,7 @@ module.exports = {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -912,7 +1068,7 @@ module.exports = {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.</span> <span class="nav-text">安装依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#未安装css分离的配置"><span class="nav-number">1.0.1.</span> <span class="nav-text">未安装css分离的配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装css分离"><span class="nav-number">1.1.</span> <span class="nav-text">安装css分离</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖"><span class="nav-number">1.1.1.</span> <span class="nav-text">依赖</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">1.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把相对路径转换绝对路"><span class="nav-number">1.3.</span> <span class="nav-text">把相对路径转换绝对路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把图片放到指定的文件夹下"><span class="nav-number">1.4.</span> <span class="nav-text">把图片放到指定的文件夹下</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空缓存的dist中文件"><span class="nav-number">1.5.</span> <span class="nav-text">清空缓存的dist中文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-2"><span class="nav-number">1.5.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Less文件的打包和分离"><span class="nav-number">1.6.</span> <span class="nav-text">Less文件的打包和分离</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖-3"><span class="nav-number">1.6.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-3"><span class="nav-number">1.6.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sass文件的打包和分离"><span class="nav-number">1.7.</span> <span class="nav-text">Sass文件的打包和分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动处理CSS3属性前缀-！报未知错误"><span class="nav-number">1.8.</span> <span class="nav-text">自动处理CSS3属性前缀 ！报未知错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖-4"><span class="nav-number">1.8.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-4"><span class="nav-number">1.8.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除未使用的CSS-删除的只剩下body样式"><span class="nav-number">1.9.</span> <span class="nav-text">消除未使用的CSS   !删除的只剩下body样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖-5"><span class="nav-number">1.9.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-5"><span class="nav-number">1.9.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack增加babel支持"><span class="nav-number">1.10.</span> <span class="nav-text">webpack增加babel支持</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖-6"><span class="nav-number">1.10.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-6"><span class="nav-number">1.10.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#懒-–-复制算了"><span class="nav-number"></span> <span class="nav-text">懒 – 复制算了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇总"><span class="nav-number">0.1.</span> <span class="nav-text">汇总</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖-7"><span class="nav-number">0.2.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-7"><span class="nav-number">0.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack核心概念"><span class="nav-number">1.</span> <span class="nav-text">webpack核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-多页面的入口文件"><span class="nav-number">2.</span> <span class="nav-text">1.多页面的入口文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置开发服务器"><span class="nav-number">3.</span> <span class="nav-text">2.配置开发服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置loader"><span class="nav-number">4.</span> <span class="nav-text">3.配置loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-从js中分离css"><span class="nav-number">5.</span> <span class="nav-text">4.从js中分离css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-处理css3属性前缀，消除冗余的css代码并压缩css"><span class="nav-number">6.</span> <span class="nav-text">5.处理css3属性前缀，消除冗余的css代码并压缩css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-清空打包目录"><span class="nav-number">7.</span> <span class="nav-text">5.清空打包目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-压缩js"><span class="nav-number">8.</span> <span class="nav-text">6. 压缩js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-提取js公共模块"><span class="nav-number">9.</span> <span class="nav-text">7.提取js公共模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-复制静态资源"><span class="nav-number">10.</span> <span class="nav-text">8.复制静态资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-产出html"><span class="nav-number">11.</span> <span class="nav-text">9.产出html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-性能优化-高大上的可视化分析模块"><span class="nav-number">12.</span> <span class="nav-text">10.性能优化 高大上的可视化分析模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目源码"><span class="nav-number">13.</span> <span class="nav-text">项目源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自己总结"><span class="nav-number">14.</span> <span class="nav-text">自己总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">15.</span> <span class="nav-text">配置</span></a></li></ol></div>
             
 
           </div>
