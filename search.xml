@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Spring]]></title>
+    <url>%2F2018%2F11%2F20%2FSpring%2F</url>
+    <content type="text"><![CDATA[Spring 核心容器（Core Container）、数据访问/集成（Data Access/Integration）、Web、AOP（面向切面编程，Aspect Oriented Programming）、Instrumentation、消息处理（Messaging）和测试（Test） 物料清单 —— 导入spring-framework-bom 关键字 ApplicationContext ClassPathXmlApplicationContext FileSystemXmlApplicationContext ConfigurableApplicationContext Proxy.newProxyInstance ApplicationContext的主要实现类包括： ClassPathXmlApplicationContext：从类路径下加载配置文件 ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;com/spring/javaTest/beans.xml&quot;); Twopice two = (Twopice) ctx.getBean(&quot;Testweb01&quot;); ConfigurableApplicationContext扩展与ApplicationContext 新增加两个主要方法：refresh() 启动刷新 和 close()关闭 AOP的实现 代理 Proxy.newProxyInstance 1. ClassLoader 类加载器 2. Class&lt;?&gt;[] interfaces 接口数组 代理实现的类的Class对象 3. InvocationHandler 代理对象调用方法的处理器 里面invoke是方法，3个参数 1. proxy表示当前代理的对象 2. method调用的目标方法对象 3.args方法的参数 代码 &lt;property name=&quot;info.name&quot; value=&quot;Ni&quot;/&gt; 设置bean id为info里面的name改变 &lt;property name=&quot;userInfo&quot;&gt; &lt;bean class=&quot;com.xyz.spring.helloworld.UserInfo&quot;/&gt; 内部bean表示这个类只会在这个bean内生效 &lt;/property&gt; 特殊字符&lt;![CDATA[填写特殊内容]]&gt; &lt;array&gt; &lt;value&gt;444&lt;/value&gt; &lt;ref bean=&quot;userInfo&quot;/&gt; //ref对象 bean id为userInfo &lt;/array&gt; &lt;list&gt; &lt;ref bean=&quot;userInfo&quot;/&gt; &lt;bean class=&quot;com.xyz.spring.helloworld.UserInfo&quot;/&gt; &lt;/list&gt; &lt;map&gt; &lt;entry key=&quot;k2&quot; value-ref=&quot;userInfo&quot;/&gt; &lt;/map&gt; &lt;props&gt; &lt;prop key=&quot;url&quot;&gt;jdbc:mysql///emps&lt;/prop&gt; &lt;/props&gt; 配置bean &lt;bean id=&quot;Test&quot; class=&quot;jdbc&quot; autowire=&quot;byName&quot;&gt;&lt;/bean&gt; 目标Bean的名称和属性名称设置完全相同 自动装箱 parent指定父bean(id) depends-on 指定必须子啊Bean实例化之前创建好 作用域是scope prototype 原型：表示会创建多个实例 singleton 单例：只会产生一个对象 init-method bean初始化方法 destroy-method bean销毁方法 Bean后置处理器 定义一个方法实现BeanPostProcessor接口 实现 postProcessBeforeInitialization 和 postProcessBeforeInitialization postProcessBeforeInitialization init-method执行前执行 postProcessBeforeInitialization init-method执行后执行 #{‘zhangsan’} 支持多种方式 factory-method 调用工厂方法 &lt;constructor-arg&gt;元素放参数 注解 &lt;!--配置自动扫描--&gt; &lt;context:component-scan base-package=&quot;com.thinkmore.spring.jdbc&quot;/&gt; &lt;!--加载属性文件--&gt; &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt; @Repository:标识持久性组件 @Service:标识服务层组件 @Controller:标识表现层组件 @Component:基本注解，标识了一个受Spring管理的组件 @Autowired ：自动装配 @Qualifier(&quot;userAction&quot;)：精确匹配指定id的bean c3p0-0.9.5.2 mchange-commons-java-0.2.14 mysql-connector-java-5.1.24 JDBC设置bean class为ComboPooledDataSource | user password jdbcUrl driverClass 设置bean class为JdbcTemplate | dataSource 指向上面 mysql事务&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt; &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt; &lt;/bean&gt; &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; /&gt; 注解： transactional 一个类只支持一个transactional 传播行为 Propagation Propagation.REQUIRED(默认) 表示当前方法必须运行在事务中。如果当前事务存在，方法将会在该事务中运行。、 否则，会启动一个新的事务 Propagation.REQUIRES_NEW 表示当前方法必须运行在它自己的事务中。一个新的事务将被启动。如果存在当前事务，、 在该方法执行期间，当前事务会被挂起 Propagation.NESTED 表示如果当前已经存在一个事务，那么该方法将会在嵌套事务中运行。嵌套的事务可以独立于当前事务进行单独地提交或回滚。如果当前事务不存在，那么其行为与PROPAGATION_REQUIRED一样。注意各厂商对这种传播行为的支持是有所差异的。可以参考资源管理器的文档来确认它们是否支持嵌套事务 rollBackFor：对哪些异常进行回滚。通常默认值即可。 noRollBackFor：对哪些异常不进行回滚。通常默认值即可。 readOnly：指定事务是否为只读。这个事务只支持读取，不支持更新。 timeout：强制回滚之前事务可以占用的时间。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[Git]]></title>
     <url>%2F2018%2F10%2F10%2FGit%2F</url>
     <content type="text"><![CDATA[ssh-keygen 找到路径​ git remote -v​ git remote add 名称 地址​ git init 初始化​ git clone git项目网址​ git config –global user-name ‘名字’​ git config –global user-email ‘邮箱’​ git config –list​ git status​ git add 文件名称 //把文件放在缓存区内​ git rm cached 文件每次 //把文件删除缓存区​ git commit -m ‘文件的描述’​ git push 上传 git rm 名字 git commit -m &#39;删除的描述&#39; git push 更改，相当于删除服务器的此内容 ​ ​ 版本更新操作​ git log （git log --pretty=oneline/git log --oneline） 查看更新的日志 git reflog 显示前进后退的次数，+更新的日志 git reset --hard 引索（a6ace91 / git log --oneline里面黄色） 退后 git reset --hard HEAD~n n为数字，表示退后几步 git reset --hard HEAD^ ^只能前进一步，但是可以多次写（^^退2步） 空格翻页 b上翻页 q退出 文件比较 git diff 更改了名称的文件名 ​ 命令行操作​ ls 查看当前的目录文件​ touch 创建文件​ vi 编辑文件​ cat 文件内容 抓取pull的实现git remote origin http://网站git fetch origin master 抓取远程库中master，下载到本地 查看​ git checkout origin/master 查看远程地址的master git merge origin/master 合并master git pull origin master //fetch merge合并，不需要考虑 示范：​ 创建一个文件夹​ git init​ 创建一个项目复制链接:link​ git remote add origin link(链接) 定义变量 origin = link​ git add 文件​ git commit -m ‘描述’ 文件​ git push origin master 需要加入团队 git clone origin git add 文件 git commit -m &#39;描述&#39; 文件 git push origin master git branch -v git branch hello git checkout hello git add 文件 git commit -m &#39;分支描述&#39; git push origin hello 分支合并 git checkout master git merge hello 合并hello分支内容 //如果不成功，则说明冲突了 冲突 vi 文件 编辑，留下需要的 git add 文件 git commit -m &#39;描述&#39; git push origin master]]></content>
@@ -19,8 +24,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>分享</tag>
         <tag>技术</tag>
+        <tag>分享</tag>
       </tags>
   </entry>
   <entry>
@@ -54,8 +59,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>分享</tag>
         <tag>技术</tag>
+        <tag>分享</tag>
       </tags>
   </entry>
   <entry>
@@ -90,8 +95,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>分享</tag>
         <tag>技术</tag>
+        <tag>分享</tag>
       </tags>
   </entry>
   <entry>
