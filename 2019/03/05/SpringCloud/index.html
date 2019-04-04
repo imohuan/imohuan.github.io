@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Spring Cloud  注册 Eureka Server端- Application @EnableEurekaServer     public class Demo1Application {}  - Application.yml spring:   application:     name: eureka server:   port: 8671  eureka:   client:">
+<meta name="description" content="Spring Cloud  注册 Eureka Server端&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-eureka-server&amp;lt;/artifactId&amp;gt; &amp;lt;/">
 <meta name="keywords" content="原生,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Cloud">
 <meta property="og:url" content="https://imohuan.github.io/2019/03/05/SpringCloud/index.html">
 <meta property="og:site_name" content="Imohuan">
-<meta property="og:description" content="Spring Cloud  注册 Eureka Server端- Application @EnableEurekaServer     public class Demo1Application {}  - Application.yml spring:   application:     name: eureka server:   port: 8671  eureka:   client:">
+<meta property="og:description" content="Spring Cloud  注册 Eureka Server端&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-eureka-server&amp;lt;/artifactId&amp;gt; &amp;lt;/">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/1.png">
 <meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/2.png">
@@ -103,11 +103,26 @@
 <meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/7.png">
 <meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/8.png">
 <meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/9.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/11.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/12.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/13.png">
 <meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/10.png">
-<meta property="og:updated_time" content="2019-04-03T02:15:59.539Z">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/14.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/15.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/16.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/17.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/18.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/19.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/20.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/21.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/22.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/25.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/24.png">
+<meta property="og:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/26.png">
+<meta property="og:updated_time" content="2019-04-04T06:16:09.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud">
-<meta name="twitter:description" content="Spring Cloud  注册 Eureka Server端- Application @EnableEurekaServer     public class Demo1Application {}  - Application.yml spring:   application:     name: eureka server:   port: 8671  eureka:   client:">
+<meta name="twitter:description" content="Spring Cloud  注册 Eureka Server端&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-eureka-server&amp;lt;/artifactId&amp;gt; &amp;lt;/">
 <meta name="twitter:image" content="https://imohuan.github.io/2019/03/05/SpringCloud/1.png">
 
 
@@ -397,11 +412,16 @@
       
         <h4 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h4><p><img src="/2019/03/05/SpringCloud/1.png" alt=""></p>
 <p><img src="/2019/03/05/SpringCloud/2.png" alt=""></p>
-<h5 id="注册-Eureka-Server端"><a href="#注册-Eureka-Server端" class="headerlink" title="注册 Eureka Server端"></a>注册 Eureka Server端</h5><pre><code class="java">- Application
+<h5 id="注册-Eureka-Server端"><a href="#注册-Eureka-Server端" class="headerlink" title="注册 Eureka Server端"></a>注册 Eureka Server端</h5><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">- Application
 @EnableEurekaServer    
 public class Demo1Application {}
-
-- Application.yml
+</code></pre>
+<pre><code class="yaml">- Application.yml
 spring:
   application:
     name: eureka
@@ -417,11 +437,16 @@ eureka:
     # 客户端上线 下线 自我保护   （开发阶段使用）   只在server端注册
     enable-self-preservation: false
 </code></pre>
-<h5 id="注册-Eureka-Clint端"><a href="#注册-Eureka-Clint端" class="headerlink" title="注册 Eureka Clint端"></a>注册 Eureka Clint端</h5><pre><code class="java">- Application
+<h5 id="注册-Eureka-Client端"><a href="#注册-Eureka-Client端" class="headerlink" title="注册 Eureka Client端"></a>注册 Eureka Client端</h5><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">- Application
 @EnableEurekaClient
 public class Demo1Application {}
-
-- Application.yml
+</code></pre>
+<pre><code class="yaml">- Application.yml
 spring:
   application:
     name: product
@@ -482,6 +507,8 @@ String response = restTmplate.getForObject(&quot;http://PRODUCT/msg&quot;, Strin
 <h5 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h5><pre><code class="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
     &lt;artifactId&gt;spring-cloud-starter-feign&lt;/artifactId&gt;
+    &lt;!--相同的--&gt;
+    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
 &lt;/dependency&gt;
 </code></pre>
 <pre><code class="java">- 启用注解
@@ -522,18 +549,544 @@ mvn -Dmaven.test.skip=true -U clean install
 </blockquote>
 <p><img src="/2019/03/05/SpringCloud/9.png" alt=""></p>
 <h4 id="应用间通信"><a href="#应用间通信" class="headerlink" title="应用间通信"></a>应用间通信</h4><h6 id="客服端负载均衡器：-Ribbon"><a href="#客服端负载均衡器：-Ribbon" class="headerlink" title="客服端负载均衡器： Ribbon"></a>客服端负载均衡器： Ribbon</h6><ol>
-<li>RestTemplate  2. Feign  3. Zuul</li>
-<li>如负载均衡<pre><code>1. 服务发现         -发现依赖服务列表   根据服务名称来查询服务
-   2. 服务选择规则        - 如何从多个服务选择一个服务
-      3. 服务监听                - 剔除失效服务
+<li>RestTemplate  2. Feign  3. Zuul<pre><code>2. 如负载均衡
 </code></pre><ol start="3">
 <li>流程<pre><code>1. ServerList （获取所有服务）-&gt;  ServerListFilter （过滤一些服务）-&gt; IRule （选择）
 </code></pre></li>
 </ol>
 </li>
 </ol>
-<h5 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h5><p><img src="/2019/03/05/SpringCloud/10.png" alt=""></p>
+<h4 id="统一配置中心"><a href="#统一配置中心" class="headerlink" title="统一配置中心"></a>统一配置中心</h4><p><img src="/2019/03/05/SpringCloud/11.png" alt=""></p>
+<p>​    SpringCloudConfig就是我们通常意义上的配置中心，把应用原本放在本地文件的配置抽取出来放在中心服务器，从而能够提供更好的管理、发布能力。SpringCloudConfig分服务端和客户端，服务端负责将git（svn）中存储的配置文件发布成REST接口，客户端可以从服务端REST接口获取配置。但客户端并不能主动感知到配置的变化，从而主动去获取新的配置，这需要每个客户端通过POST方法触发各自的<code>/refresh</code></p>
+<p>​    SpringCloudBus通过一个轻量级消息代理连接分布式系统的节点。这可以用于广播状态更改（如配置更改）或其他管理指令。SpringCloudBus提供了通过POST方法访问的endpoint<code>/bus/refresh</code>，这个接口通常由git的钩子功能调用，用以通知各个SpringCloudConfig的客户端去服务端更新配置</p>
+<h5 id="配置-ConfigServer"><a href="#配置-ConfigServer" class="headerlink" title="配置 ConfigServer"></a>配置 ConfigServer</h5><blockquote>
+<p>配置会从git中拉下来 </p>
+</blockquote>
+<ul>
+<li>创建一个服务  pom    Config Server ， Eureka Discovery</li>
+</ul>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">- 启用注解
+@EnableEurekaClient
+@EnableConfigServer
+</code></pre>
+<pre><code class="yaml">- Application.yml
+spring:
+  application:
+    name: Config
+  cloud:        
+    config:
+      server:
+        git:
+          uri: https://gitee.com/mohuan/Spring-Cloud
+          username: xxx@qq.com
+          password: xxx
+          basedir: /xx/xxx
+# 配置仓库地址 账号密码    basedir 存放从远程git拉取下来的配置文件存放在本地git的路径
+server:
+  port: 8102
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8671/eureka        // 注册到上面的server中
+</code></pre>
+<p><img src="/2019/03/05/SpringCloud/12.png" alt=""></p>
+<p>Server端启动后，提供了如下的接口地址，参数说明</p>
+<ul>
+<li>application：应用名</li>
+<li>name 服务名称</li>
+<li>profile：环境<ul>
+<li>env: 自定义   (添加到git远程仓库需要添加) <a href="http://localhost:8102/Client-自定义env.yml" target="_blank" rel="noopener">http://localhost:8102/Client-自定义env.yml</a> </li>
+</ul>
+</li>
+<li>label：版本 分支</li>
+</ul>
+<pre><code>/{application}/{profile}[/{label}]
+/{application}-{profile}.yml
+/{label}/{application}-{profile}.yml
+/{application}-{profile}.properties
+/{label}/{application}-{profile}.properties
+</code></pre><blockquote>
+<p>NOTE：是配置文件的名字一般是有两部分组成，举个例子感受下，alan-provider-data-config-dev.properties，其中alan-provider-data-config是第一部分，这部分建议通过命名规则能让你知道是哪一个项目的配置，并且客户端要配置<code>spring.cloud.config.name=alan-provider-data-config</code>，才能让客户端知道自己要去服务端找哪一个配置文件。dev是第二部分，这部分用以区别配置文件应用的场景，是开发环境、测试环境或者生产环境</p>
+</blockquote>
+<blockquote>
+<p>访问<a href="http://localhost:8102/Client-a.yml" target="_blank" rel="noopener">http://localhost:8102/Client-a.yml</a> (其他格式)</p>
+</blockquote>
+<h5 id="配置-ConfigClient"><a href="#配置-ConfigClient" class="headerlink" title="配置 ConfigClient"></a>配置 ConfigClient</h5><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-config-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="yaml">- bootstrap 因为如果config需要在application之前就需要加载完成
+spring:
+  application:
+    name: Client
+  cloud:
+    config:
+      discovery:
+        # 启用 config
+        enabled: true
+        # 获取 config 的 Application名称
+        service-id: CONFIG
+      # 访问需要 http://localhost:8102/${name}-${profile}.yml
+      profile: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka
 
+</code></pre>
+<blockquote>
+<p>config访问流程    client -&gt; server -&gt; config  &lt;-返回</p>
+<p>也就是说如果Server端口不是8761(Cloud默认) 的话，就会从8888端口查询Eureka，这样就会加载不到配置</p>
+<p>所有eureka.client.service-ur.defaultZone: <a href="http://localhost:8001/eureka" target="_blank" rel="noopener">http://localhost:8001/eureka</a>    需要放到Client中</p>
+</blockquote>
+<blockquote>
+<p>config获取规则   </p>
+<p>configServer会从git上获取（当前环境 {product-dev.yml}和普通环境{product.yml}）的配置文件并且合并</p>
+</blockquote>
+<h5 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h5><p>​    部署多台Config服务</p>
+<h5 id="Spring-Cloud-Bus"><a href="#Spring-Cloud-Bus" class="headerlink" title="Spring Cloud Bus"></a>Spring Cloud Bus</h5><p><img src="/2019/03/05/SpringCloud/13.png" alt=""></p>
+<blockquote>
+<p>SpringBoot SpringCloud版本 2.0.0.BUILD-SNAPSHOT </p>
+</blockquote>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-bus-amqp&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="yaml"># 配置rabbitmq
+spring:
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: guest
+    password: guest
+
+# 向外暴露接口  /actuator/bus-refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: &quot;*&quot;       
+</code></pre>
+<blockquote>
+<p>引用配置的地方需要添加 <code>@RefreshScope</code></p>
+<p>不然 不会生效</p>
+</blockquote>
+<h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p><img src="/2019/03/05/SpringCloud/10.png" alt=""></p>
+<h5 id="安装RabbitMQ-下载"><a href="#安装RabbitMQ-下载" class="headerlink" title="安装RabbitMQ  下载"></a>安装RabbitMQ  <a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/924551/2acb1100-51c1-11e9-9aaf-d0364c4ee481?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20190403%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20190403T031558Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=0a85d99647912ebfda9696aa9c96eb09a1b6ff5f1cad2c9c4d008b55de86bcff&amp;X-Amz-SignedHeaders=host&amp;actor_id=41279222&amp;response-content-disposition=attachment%3B%20filename%3Drabbitmq-server-3.7.14.exe&amp;response-content-type=application%2Foctet-stream" target="_blank" rel="noopener">下载</a></h5><pre><code class="console">docker run -d --hostname my-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3.7.14-management
+</code></pre>
+<blockquote>
+<p>安装RabbitMQ    -p 1. 将容器中端口映射到本地端口 2. 客服端端口映射 </p>
+<p>默认密码 ： guest            端口访问更具docker启动ip来访问 192.168.99.100</p>
+</blockquote>
+<h5 id="MQ应用场景"><a href="#MQ应用场景" class="headerlink" title="MQ应用场景"></a>MQ应用场景</h5><ul>
+<li>异步处理</li>
+<li>日志处理</li>
+<li>流量消峰</li>
+<li>应用解耦</li>
+</ul>
+<h5 id="编码实现"><a href="#编码实现" class="headerlink" title="编码实现"></a>编码实现</h5><ul>
+<li><p>接收消息队列</p>
+<pre><code class="java">// @RabbitListener(queuesToDeclare = @Queue(&quot;myQueue&quot;))    //  指定队列并且创建队列
+@RabbitListener(bindings = @QueueBinding(
+    value = @Queue(&quot;myQueue&quot;),
+    key = &quot;fruit&quot;,
+    exchange = @Exchange(&quot;myExchange&quot;)        // 绑定 exchange 和指定 key （相当于过滤）
+))
+public void processFruit(String msg) {
+    System.out.println(msg);
+}
+</code></pre>
+</li>
+<li><p>发送消息队列</p>
+<pre><code class="java">@Autowired
+private AmqpTemplate amqptemplate;
+
+amqptemplate.convertAndSend(&quot;myExchange&quot;, &quot;fruit&quot;, &quot;你好， 这里是需要发送的消息&quot;)
+
+</code></pre>
+<p><img src="/2019/03/05/SpringCloud/14.png" alt=""></p>
+</li>
+</ul>
+<h5 id="Spring-Cloud-Steam"><a href="#Spring-Cloud-Steam" class="headerlink" title="Spring Cloud Steam"></a>Spring Cloud Steam</h5><p><img src="/2019/03/05/SpringCloud/15.png" alt=""></p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-starter-rabbit&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">// 创建消息通道绑定的接口
+//@Input和 @Output注解定义输入通道和输出通道，都有value 属性，该属性可以用来设置消息通道的名称
+public interface StreamClient {
+    String INPUT = &quot;myMessage&quot;;
+    @Input(StreamClient.INPUT)
+    SubscribableChannel input();
+
+    @Output(StreamClient.INPUT)
+    MessageChannel output();
+}
+
+// 接收消息队列
+@EnableBinding(StreamClient.class)
+
+@StreamListener(Value = StreamClient.INPUT)        // 监听队列
+@SendTo(StreamClient.INPUT2)    // 转发当前方法return的数据
+public String process(Order message){
+    System.out.println(&quot;StreamReceiver: &quot; + message);
+    return &quot;这里是转发到下一个队列接收中&quot;;
+}
+// 发送消息队列    
+@Autowired
+private StreamClient streamClient;
+streamClient.output().send(MessageBuilder.withPayload(new Oreder()).build());
+</code></pre>
+<blockquote>
+<p>多个服务订单服务就会有多个Stream生成的消息队列，发送消息队列就会多个服务接收到</p>
+<pre><code class="yaml">- bootstrap 因为如果config需要在application之前就需要加载完成
+spring:
+cloud:
+ stream:
+   bindings:        
+       # 消息队列配置的名称
+        myMessage:
+          # 分组
+          group: order
+          # 自定义type 默认为64位编码
+          content-type: application/json
+</code></pre>
+</blockquote>
+<h5 id="异步实现"><a href="#异步实现" class="headerlink" title="异步实现"></a>异步实现</h5><p><img src="/2019/03/05/SpringCloud/16.png" alt=""></p>
+<blockquote>
+<p>异步需要考虑数据的一致性</p>
+</blockquote>
+<p><img src="/2019/03/05/SpringCloud/17.png" alt=""></p>
+<h4 id="服务网关和Zuul"><a href="#服务网关和Zuul" class="headerlink" title="服务网关和Zuul"></a>服务网关和Zuul</h4><p>​    服务网关是所有服务的主入口，要一天24小可用 </p>
+<ul>
+<li>稳定性，高可用，安全性，扩展性，性能，并发</li>
+<li>特点：  路由+过滤器 = Zuul 核心讲就是一些列过滤器</li>
+<li>过滤器API<ul>
+<li>前置（Pre）<ul>
+<li>限流</li>
+<li>鉴权</li>
+<li>参数校验调整</li>
+</ul>
+</li>
+<li>路由（Router）</li>
+<li>后置（post）<ul>
+<li>统计    </li>
+<li>日志</li>
+</ul>
+</li>
+<li>错误（Error）</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/03/05/SpringCloud/18.png" alt=""></p>
+<p><img src="/2019/03/05/SpringCloud/19.png" alt=""></p>
+<h5 id="Zuul-服务"><a href="#Zuul-服务" class="headerlink" title="Zuul 服务"></a>Zuul 服务</h5><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-zuul&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">@EnableZuulProxy    // 启动Zuul服务
+
+</code></pre>
+<blockquote>
+<p>配置了启动注解就可以直接使用了：   <a href="http://localhost:${Zuul端口}/${其他服务名称}/${其他服务接口}" target="_blank" rel="noopener">http://localhost:${Zuul端口}/${其他服务名称}/${其他服务接口}</a></p>
+<p><a href="http://localhoost:8103/product/getList" target="_blank" rel="noopener">http://localhoost:8103/product/getList</a> 获取product服务的getList接口</p>
+<p>查看所有服务的规则   <a href="http://localhost:8103/application/routes" target="_blank" rel="noopener">http://localhost:8103/application/routes</a>    </p>
+</blockquote>
+<pre><code class="yaml"># 自定义规则
+zuul:
+  # 忽略全部敏感头
+  sensitiveHeaders:
+  routes:
+  # /myProduct/product/list -&gt; /product/product/list
+  # aaaaaa 随便写
+    aaaaaa:
+      path: /myProduct/**
+      serviceId: product
+      # 敏感头过滤，默认过了了cookie，set-cookie， authorization， 设置为空就不过滤了
+      sensitiveHeaders:
+  #简洁写法
+#    product: /myProduct/**
+  #排除某些路由 Set集合 因为有2个路径可以访问当前接口 自定义和默认
+  ignored-patterns:
+    - /**/product/listForOrder
+# 安全url
+management:
+  security:
+    enabled: false
+</code></pre>
+<h5 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h5><pre><code class="java">@Component
+public class ZuulConfig {
+
+   @ConfigurationProperties(&quot;zuul&quot;)
+   @RefreshScope
+   public ZuulProperties zuulProperties() {
+       return new ZuulProperties();        // 因为默认配置中就有
+   }
+}
+</code></pre>
+<h5 id="高可用-1"><a href="#高可用-1" class="headerlink" title="高可用"></a>高可用</h5><ul>
+<li>多个Zuul节点注册到Eureka Server</li>
+<li>Nginx和Zuul ” 混搭 “</li>
+</ul>
+<h5 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h5><p><img src="/2019/03/05/SpringCloud/20.png" alt=""></p>
+<pre><code class="java">@Component
+public class addResponseHeaderFilter extends ZuulFilter{
+    @Override
+    public String filterType() {
+        // 后置类型 PRE_TYPE 前置  下面所有的常量都是在 FilterConstants
+        return POST_TYPE;     
+    }
+
+    @Override
+    public int filterOrder() {
+        return SEND_RESPONSE_FILTER_ORDER - 1;    // 优先级 
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        // 获取 请求 上下文
+        RequestContext requestContext = RequestContext.getCurrentContext();    
+        HttpServletResponse response = requestContext.getResponse();
+        response.setHeader(&quot;X-Foo&quot;, UUID.randomUUID().toString());
+        return null;
+    }
+}
+</code></pre>
+<h5 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h5><blockquote>
+<p>限流  早于 鉴权</p>
+</blockquote>
+<p><img src="/2019/03/05/SpringCloud/21.png" alt=""></p>
+<p>Govra 中Google 已经实现这样的令牌桶</p>
+<pre><code class="java">// 再次实现一个filter 最高优先级
+// 每秒进入100个令牌
+private static final RateLimiter RATE_LIMITER = RateLimiter.create(100); 
+
+// 取令牌
+if (!RATE_LIMITER.tryAcquire()) { new Error(&quot;没有取到令牌&quot;) }
+</code></pre>
+<h5 id="跨域-ajax跨域完全讲解（课程免费）"><a href="#跨域-ajax跨域完全讲解（课程免费）" class="headerlink" title="跨域  ajax跨域完全讲解（课程免费）"></a>跨域  ajax跨域完全讲解（课程免费）</h5><ul>
+<li>被调用的类或方法上增加@CrossOrigin注解  @CrossOrigin(altowCredentials=”true”)|</li>
+<li>在Zuul里增加CorsFilter过滤器</li>
+</ul>
+<pre><code class="java">@Configuration
+public class CorsConfig {
+
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true);    // 支持跨域
+        config.setAllowedOrigins(Arrays.asList(&quot;*&quot;)); //http:www.a.com 
+        config.setAllowedHeaders(Arrays.asList(&quot;*&quot;));
+        config.setAllowedMethods(Arrays.asList(&quot;*&quot;));
+        config.setMaxAge(300l);
+
+        source.registerCorsConfiguration(&quot;/**&quot;, config);
+        return new CorsFilter(source);
+    }
+}
+</code></pre>
+<h4 id="服务容错和Hystrix"><a href="#服务容错和Hystrix" class="headerlink" title="服务容错和Hystrix"></a>服务容错和Hystrix</h4><p>​    当我们有abc三个服务时，b访问c出错了，b就会重试，同步等待就会使资源耗尽，然后b又不可用，a同理</p>
+<p>Hystrix 防雪崩利器 基于Netflix对应的Hystrix​    </p>
+<h5 id="特点-和-实现"><a href="#特点-和-实现" class="headerlink" title="特点 和 实现"></a>特点 和 实现</h5><ul>
+<li>服务降级  </li>
+<li>服务熔断</li>
+<li>依赖隔离 </li>
+<li>监控（Hystrix Dashboard）</li>
+</ul>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">//@EnableCircuitBreaker // 启动hystrix
+
+// 当中包含 @SpringBootApplication @EnableDiscoveryClient @EnableCircuitBreaker
+@SpringCloudApplication     // 直接使用这个注解同理
+
+</code></pre>
+<h5 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h5><ul>
+<li>优先核心服务，非核心服务不可用或弱可用</li>
+<li>通过<code>HystrixCommand</code>注解指定</li>
+<li><code>fallbackMethod</code>（回退函数）中具体实现降级逻辑</li>
+</ul>
+<pre><code class="java">// 当controller中抛出异常就会触发服务降级执行fallback方法
+@HystrixCommand(fallbackMethod = &quot;fallback&quot;)    
+@GetMapping(&quot;/hystrix&quot;)
+public String hystrix() {}
+
+private String fallback() { return &quot;太拥挤了，请稍后再试&quot;; }
+</code></pre>
+<ul>
+<li>超时时间设置 </li>
+</ul>
+<pre><code class="JAVA">@HystrixCommand(commandProperties = {
+    @HystrixProperty(
+        // name 技巧， 进到HystrixProperty中，进入hystrix包，找到commandProperties
+        name = &quot;execution.isolation.thread.timeoutInMilliseconds&quot;, 
+        value = &quot;3000&quot;)
+})
+</code></pre>
+<ul>
+<li>DefaultProperties 默认controller设置fallback</li>
+</ul>
+<pre><code class="java">@DefaultProperties(defaultFallback = &quot;defaultFallback&quot;)
+</code></pre>
+<h5 id="依赖隔离"><a href="#依赖隔离" class="headerlink" title="依赖隔离"></a>依赖隔离</h5><ul>
+<li>线程池隔离 不会拖跨其他服务</li>
+<li>Hystrix自动实现了依赖隔离 （@HystrixCommand）</li>
+</ul>
+<p><img src="/2019/03/05/SpringCloud/22.png" alt=""></p>
+<pre><code class="java">@HystrixCommand(commandProperties = {
+    @HystrixProperty(name = &quot;circuitBreaker.enabled&quot;, value = &quot;true&quot;),                  //设置熔断
+    @HystrixProperty(name = &quot;circuitBreaker.requestVolumeThreshold&quot;, value = &quot;10&quot;),    //请求数达到后才计算
+    @HystrixProperty(name = &quot;circuitBreaker.sleepWindowInMilliseconds&quot;, value = &quot;10000&quot;), //休眠时间窗
+    @HystrixProperty(name = &quot;circuitBreaker.errorThresholdPercentage&quot;, value = &quot;60&quot;),    //错误率
+})
+</code></pre>
+<pre><code class="yaml">hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+
+    getProductInfolist:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+</code></pre>
+<blockquote>
+<p>当错误率到达设置值时将会开启熔断，开启休眠时间窗，到时将会开启半熔断，让访问进入到主程序，如果还是错误，就会再次开启休眠时间窗</p>
+</blockquote>
+<h5 id="Feign使用Hystrix"><a href="#Feign使用Hystrix" class="headerlink" title="Feign使用Hystrix"></a>Feign使用Hystrix</h5><ul>
+<li>启动服务</li>
+</ul>
+<pre><code class="yaml">feign:
+  hystrix:
+    enabled: true
+</code></pre>
+<ul>
+<li>配置扫描包 （Order 调用 Product， Feign时在Product中定义的，Order 引用Product中的包）</li>
+</ul>
+<pre><code class="java">@ComponentScan(basePackages = &quot;com.xxx.xxx&quot;)
+</code></pre>
+<ul>
+<li>Feign接口定义 fallback为降级回调 接收一个类 类实现当前接口 </li>
+</ul>
+<pre><code class="java">@FeignClient(name = &quot;product&quot;, fallback = ProductClient.ProductClientFallback.class)
+public interface ProductClient {
+
+    @PostMapping(&quot;/product/listForOrder&quot;)
+    List&lt;ProductInfoOutput&gt; listForOrder(@RequestBody List&lt;String&gt; productIdList);
+
+    @PostMapping(&quot;/product/decreaseStock&quot;)
+    void decreaseStock(@RequestBody List&lt;DecreaseStockInput&gt; decreaseStockInputList);
+
+    @Component
+    static class ProductClientFallback implements ProductClient {
+
+        @Override
+        public List&lt;ProductInfoOutput&gt; listForOrder(List&lt;String&gt; productIdList) {
+            return null;
+        }
+
+        @Override
+        public void decreaseStock(List&lt;DecreaseStockInput&gt; decreaseStockInputList) {
+
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p>当降级之后就会调用fallback指定的类中对应的方法</p>
+</blockquote>
+<h5 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h5><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-hystrix-dashboard&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!-- 这个包在上面Stream-rabbit引用了就不用在引用了 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="java">@EnableHystrixDashboard
+</code></pre>
+<ul>
+<li>访问 <a href="http://localhost:${自己端口}/hystrix" target="_blank" rel="noopener">http://localhost:${自己端口}/hystrix</a></li>
+</ul>
+<p><img src="/2019/03/05/SpringCloud/25.png" alt=""></p>
+<blockquote>
+<p>这里访问不了是因为2.0做了一些修改 需要设置 地址， 默认为application/hystrix.steam/**</p>
+</blockquote>
+<pre><code class="yaml">management:
+  context-path: /
+</code></pre>
+<p><img src="/2019/03/05/SpringCloud/24.png" alt=""></p>
+<h4 id="服务追踪"><a href="#服务追踪" class="headerlink" title="服务追踪"></a>服务追踪</h4><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-sleuth&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p><img src="/2019/03/05/SpringCloud/26.png" alt=""></p>
+<h5 id="可视化-Zipkin"><a href="#可视化-Zipkin" class="headerlink" title="可视化 Zipkin"></a>可视化 Zipkin</h5><pre><code class="dockerfile">docker run -d -p 9411:9411 openzipkin/zipkin
+</code></pre>
+<ul>
+<li>访问 <a href="http://192.168.99.100:9411/zipkin" target="_blank" rel="noopener">http://192.168.99.100:9411/zipkin</a></li>
+<li>连接到Cloud</li>
+</ul>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-sleuth-zipkin&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>这边就会引入2个依赖完我们可以直接引用starter-zipkin</li>
+</ul>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-zipkin&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<pre><code class="yaml">spring:
+  zipkin:
+      base-url: http://192.168.99.100:9411/zipkin
+  sleuth:
+    sampler:
+      # 将作用链的100% 发送到外部zipkin  默认为0.1f （不用全部发送到外部）
+      percentage: 1    
+</code></pre>
+<h4 id="Docker-镜像"><a href="#Docker-镜像" class="headerlink" title="Docker     镜像"></a>Docker     <a href="https://www.163yun.com/" target="_blank" rel="noopener">镜像</a></h4><pre><code class="dockerfile">FROM hub.c.163. com/library/java:8-alpine 
+ADD target/*. jar app.jar 
+EXPOSE 8001
+ENTRYPOINI [&quot;java&quot;,&quot;-jar&quot;,&quot;/app.jar&quot;]
+</code></pre>
+<pre><code class="dockerfile">docker build -t 名称 .
+docker run -p 8001:8001 -d 名称
+</code></pre>
+<h2 id="Docker运行第一个java容器"><a href="#Docker运行第一个java容器" class="headerlink" title="Docker运行第一个java容器"></a><a href="https://www.imooc.com/learn/824" target="_blank" rel="noopener">Docker运行第一个java容器</a></h2><h2 id="Docker-Kubernetes-k8s-微服务容器化实践"><a href="#Docker-Kubernetes-k8s-微服务容器化实践" class="headerlink" title="Docker+Kubernetes(k8s)微服务容器化实践"></a><a href="https://coding.imooc.com/class/198.html" target="_blank" rel="noopener">Docker+Kubernetes(k8s)微服务容器化实践</a></h2>
       
     </div>
     
@@ -594,8 +1147,8 @@ mvn -Dmaven.test.skip=true -U clean install
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/05/security/" rel="next" title="security">
-                <i class="fa fa-chevron-left"></i> security
+              <a href="/2018/12/29/redis/" rel="next" title="redis">
+                <i class="fa fa-chevron-left"></i> redis
               </a>
             
           </div>
@@ -603,6 +1156,10 @@ mvn -Dmaven.test.skip=true -U clean install
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/security/" rel="prev" title="security">
+                security <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -767,7 +1324,7 @@ mvn -Dmaven.test.skip=true -U clean install
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注册-Eureka-Server端"><span class="nav-number">1.1.</span> <span class="nav-text">注册 Eureka Server端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注册-Eureka-Clint端"><span class="nav-number">1.2.</span> <span class="nav-text">注册 Eureka Clint端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现高可用"><span class="nav-number">1.3.</span> <span class="nav-text">实现高可用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注册发现"><span class="nav-number">1.4.</span> <span class="nav-text">注册发现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拆分"><span class="nav-number">2.</span> <span class="nav-text">拆分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#起点终点"><span class="nav-number">2.1.</span> <span class="nav-text">起点终点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需要考虑的因素和坚持的原则"><span class="nav-number">2.2.</span> <span class="nav-text">需要考虑的因素和坚持的原则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务间通信"><span class="nav-number">3.</span> <span class="nav-text">服务间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RestTemplate"><span class="nav-number">3.1.</span> <span class="nav-text">RestTemplate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Feign"><span class="nav-number">3.2.</span> <span class="nav-text">Feign</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分模块"><span class="nav-number">3.3.</span> <span class="nav-text">分模块</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用间通信"><span class="nav-number">4.</span> <span class="nav-text">应用间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#客服端负载均衡器：-Ribbon"><span class="nav-number">4.0.1.</span> <span class="nav-text">客服端负载均衡器： Ribbon</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#异步"><span class="nav-number">4.1.</span> <span class="nav-text">异步</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注册-Eureka-Server端"><span class="nav-number">1.1.</span> <span class="nav-text">注册 Eureka Server端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注册-Eureka-Client端"><span class="nav-number">1.2.</span> <span class="nav-text">注册 Eureka Client端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现高可用"><span class="nav-number">1.3.</span> <span class="nav-text">实现高可用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注册发现"><span class="nav-number">1.4.</span> <span class="nav-text">注册发现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拆分"><span class="nav-number">2.</span> <span class="nav-text">拆分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#起点终点"><span class="nav-number">2.1.</span> <span class="nav-text">起点终点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需要考虑的因素和坚持的原则"><span class="nav-number">2.2.</span> <span class="nav-text">需要考虑的因素和坚持的原则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务间通信"><span class="nav-number">3.</span> <span class="nav-text">服务间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RestTemplate"><span class="nav-number">3.1.</span> <span class="nav-text">RestTemplate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Feign"><span class="nav-number">3.2.</span> <span class="nav-text">Feign</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分模块"><span class="nav-number">3.3.</span> <span class="nav-text">分模块</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用间通信"><span class="nav-number">4.</span> <span class="nav-text">应用间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#客服端负载均衡器：-Ribbon"><span class="nav-number">4.0.1.</span> <span class="nav-text">客服端负载均衡器： Ribbon</span></a></li></ol></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#统一配置中心"><span class="nav-number">5.</span> <span class="nav-text">统一配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置-ConfigServer"><span class="nav-number">5.1.</span> <span class="nav-text">配置 ConfigServer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置-ConfigClient"><span class="nav-number">5.2.</span> <span class="nav-text">配置 ConfigClient</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高可用"><span class="nav-number">5.3.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Cloud-Bus"><span class="nav-number">5.4.</span> <span class="nav-text">Spring Cloud Bus</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步"><span class="nav-number">6.</span> <span class="nav-text">异步</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装RabbitMQ-下载"><span class="nav-number">6.1.</span> <span class="nav-text">安装RabbitMQ  下载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MQ应用场景"><span class="nav-number">6.2.</span> <span class="nav-text">MQ应用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编码实现"><span class="nav-number">6.3.</span> <span class="nav-text">编码实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Cloud-Steam"><span class="nav-number">6.4.</span> <span class="nav-text">Spring Cloud Steam</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#异步实现"><span class="nav-number">6.5.</span> <span class="nav-text">异步实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务网关和Zuul"><span class="nav-number">7.</span> <span class="nav-text">服务网关和Zuul</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zuul-服务"><span class="nav-number">7.1.</span> <span class="nav-text">Zuul 服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态路由"><span class="nav-number">7.2.</span> <span class="nav-text">动态路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高可用-1"><span class="nav-number">7.3.</span> <span class="nav-text">高可用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器"><span class="nav-number">7.4.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#限流"><span class="nav-number">7.5.</span> <span class="nav-text">限流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#跨域-ajax跨域完全讲解（课程免费）"><span class="nav-number">7.6.</span> <span class="nav-text">跨域  ajax跨域完全讲解（课程免费）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务容错和Hystrix"><span class="nav-number">8.</span> <span class="nav-text">服务容错和Hystrix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特点-和-实现"><span class="nav-number">8.1.</span> <span class="nav-text">特点 和 实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务降级"><span class="nav-number">8.2.</span> <span class="nav-text">服务降级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#依赖隔离"><span class="nav-number">8.3.</span> <span class="nav-text">依赖隔离</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Feign使用Hystrix"><span class="nav-number">8.4.</span> <span class="nav-text">Feign使用Hystrix</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可视化"><span class="nav-number">8.5.</span> <span class="nav-text">可视化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务追踪"><span class="nav-number">9.</span> <span class="nav-text">服务追踪</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可视化-Zipkin"><span class="nav-number">9.1.</span> <span class="nav-text">可视化 Zipkin</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker-镜像"><span class="nav-number">10.</span> <span class="nav-text">Docker     镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker运行第一个java容器"><span class="nav-number"></span> <span class="nav-text">Docker运行第一个java容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Kubernetes-k8s-微服务容器化实践"><span class="nav-number"></span> <span class="nav-text">Docker+Kubernetes(k8s)微服务容器化实践</span></a></li></div>
             
 
           </div>
